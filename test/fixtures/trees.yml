@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  common_name: MyString
+  genus: MyString
+  species: MyString
+  street_no: 1
+  street: MyString
+  city: MyString
+  state: MyString
+  diameter_at_height: 1.5
+  height: 1.5
+  spread: 1.5
+  grove: false
+
+two:
+  common_name: MyString
+  genus: MyString
+  species: MyString
+  street_no: 1
+  street: MyString
+  city: MyString
+  state: MyString
+  diameter_at_height: 1.5
+  height: 1.5
+  spread: 1.5
+  grove: false

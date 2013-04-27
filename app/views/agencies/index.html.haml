@@ -1,0 +1,24 @@
+%h1 Listing agencies
+
+%table
+  %tr
+    %th Identity
+    %th Name
+    %th Description
+    %th # Trees
+    %th
+    %th
+
+  - @agencies.each do |agency|
+    %tr
+      %td= agency._id
+      %td= agency.name
+      %td= agency.description
+      %td= agency.trees.count
+      %td= link_to 'Show', agency
+      %td= link_to 'Edit', edit_agency_path(agency)
+      %td= link_to 'Destroy', agency, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Agency', new_agency_path

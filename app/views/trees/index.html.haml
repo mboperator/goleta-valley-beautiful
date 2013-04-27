@@ -1,0 +1,39 @@
+%h1 Listing trees
+
+%table
+  %tr
+    %th Common name
+    %th Genus
+    %th Species
+    %th Street no
+    %th Street
+    %th City
+    %th State
+    %th Diameter at height
+    %th Height
+    %th Spread
+    %th Grove
+    %th
+    %th
+    %th
+
+  - @trees.each do |tree|
+    %tr
+      %td= tree.common_name
+      %td= tree.genus
+      %td= tree.species
+      %td= tree.street_no
+      %td= tree.street
+      %td= tree.city
+      %td= tree.state
+      %td= tree.diameter_at_height
+      %td= tree.height
+      %td= tree.spread
+      %td= tree.grove
+      %td= link_to 'Show', tree
+      %td= link_to 'Edit', edit_tree_path(tree)
+      %td= link_to 'Destroy', tree, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tree', new_tree_path

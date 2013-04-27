@@ -1,0 +1,39 @@
+%p#notice= notice
+
+%p
+  %b Common name:
+  = @tree.common_name
+%p
+  %b Genus:
+  = @tree.genus
+%p
+  %b Species:
+  = @tree.species
+%p
+  %b Street no:
+  = @tree.street_no
+%p
+  %b Street:
+  = @tree.street
+%p
+  %b City:
+  = @tree.city
+%p
+  %b State:
+  = @tree.state
+%p
+  %b Diameter at height:
+  = @tree.diameter_at_height
+%p
+  %b Height:
+  = @tree.height
+%p
+  %b Spread:
+  = @tree.spread
+%p
+  %b Grove:
+  = @tree.grove
+
+= link_to 'Edit', edit_tree_path(@tree)
+\|
+= link_to 'Back', trees_path

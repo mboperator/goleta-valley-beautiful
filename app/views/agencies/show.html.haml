@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Shortname:
+  = @agency.shortname
+%p
+  %b Name:
+  = @agency.name
+%p
+  %b Description:
+  = @agency.description
+
+= link_to 'Edit', edit_agency_path(@agency)
+\|
+= link_to 'Back', agencies_path
