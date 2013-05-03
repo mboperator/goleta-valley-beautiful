@@ -14,12 +14,17 @@ class TreesController < ApplicationController
   # GET /trees/1
   # GET /trees/1.json
   def show
-    @tree = Tree.find(params[:id])
+    if params[:id] == 000
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @tree }
+    else
+      @tree = Tree.find(params[:id])
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @tree }
+      end
     end
+
   end
 
   # GET /trees/new

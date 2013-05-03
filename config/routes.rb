@@ -1,11 +1,11 @@
-GoletaValleyBeautiful::Application.routes.draw do
-
+GoletaValleyBeautifulPostgres::Application.routes.draw do
 
   resources :agencies
 
   resources :groups
 
   resources :trees
+
 
 
   # The priority is based upon order of creation:

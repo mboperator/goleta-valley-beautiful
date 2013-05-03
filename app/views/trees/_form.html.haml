@@ -1,43 +1,17 @@
-= form_for @tree do |f|
-  - if @tree.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@tree.errors.count, "error")} prohibited this tree from being saved:"
-      %ul
-        - @tree.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for @tree do |f|
+  = f.input :common_name
+  = f.input :genus
+  = f.input :species
+  = f.input :diameter_at_height
+  = f.input :height
+  = f.input :spread
+  = f.input :grove
+  = f.input :status
+  = f.input :maint_date
+  = f.input :plant_date
+  = f.input :replace_date
 
-  .field
-    = f.label :common_name
-    = f.text_field :common_name
-  .field
-    = f.label :genus
-    = f.text_field :genus
-  .field
-    = f.label :species
-    = f.text_field :species
-  .field
-    = f.label :street_no
-    = f.number_field :street_no
-  .field
-    = f.label :street
-    = f.text_field :street
-  .field
-    = f.label :city
-    = f.text_field :city
-  .field
-    = f.label :state
-    = f.text_field :state
-  .field
-    = f.label :diameter_at_height
-    = f.text_field :diameter_at_height
-  .field
-    = f.label :height
-    = f.text_field :height
-  .field
-    = f.label :spread
-    = f.text_field :spread
-  .field
-    = f.label :grove
-    = f.check_box :grove
-  .actions
-    = f.submit 'Save'
+  = f.association :agency, as: :radio_buttons
+  = f.association :groups, as: :check_boxes
+
+  = f.button :submit

@@ -11,7 +11,7 @@
 
   - @agencies.each do |agency|
     %tr
-      %td= agency._id
+      %td= agency.shortname
       %td= agency.name
       %td= agency.description
       %td= agency.trees.count

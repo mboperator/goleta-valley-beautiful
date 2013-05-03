@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-GoletaValleyBeautiful::Application.load_tasks
+GoletaValleyBeautifulPostgres::Application.load_tasks

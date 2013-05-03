@@ -4,24 +4,24 @@ one:
   common_name: MyString
   genus: MyString
   species: MyString
-  street_no: 1
-  street: MyString
-  city: MyString
-  state: MyString
+  maint_date: 2013-04-27
+  replace_date: 2013-04-27
+  plant_date: 2013-04-27 09:36:58
   diameter_at_height: 1.5
   height: 1.5
   spread: 1.5
   grove: false
+  status: 1
 
 two:
   common_name: MyString
   genus: MyString
   species: MyString
-  street_no: 1
-  street: MyString
-  city: MyString
-  state: MyString
+  maint_date: 2013-04-27
+  replace_date: 2013-04-27
+  plant_date: 2013-04-27 09:36:58
   diameter_at_height: 1.5
   height: 1.5
   spread: 1.5
   grove: false
+  status: 1

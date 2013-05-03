@@ -1,0 +1,1 @@
+﻿SELECT st_asbinary(st_force_2d("lonlat"::geomety),'NDR'),"id" FROM "public"."trees" WHERE "lonlat" && st_makeenvelope(-180, -90, 180, 90, 4326)

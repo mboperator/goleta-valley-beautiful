@@ -1,0 +1,1 @@
+﻿ALTER DATABASE "Goleta Valley Beautiful (Postgres)_development" SET search_path = '$user', 'postgis', 'public';

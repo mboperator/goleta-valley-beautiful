@@ -3,24 +3,12 @@
 %p
   %b Common name:
   = @tree.common_name
-%p
   %b Genus:
   = @tree.genus
-%p
   %b Species:
   = @tree.species
-%p
-  %b Street no:
-  = @tree.street_no
-%p
-  %b Street:
-  = @tree.street
-%p
-  %b City:
-  = @tree.city
-%p
-  %b State:
-  = @tree.state
+  %b Planted at:
+  = @tree.plant_date
 %p
   %b Diameter at height:
   = @tree.diameter_at_height
@@ -33,6 +21,12 @@
 %p
   %b Grove:
   = @tree.grove
+= if @tree.maint_date || @tree.replace_date
+  %p
+    %b Last Maintained
+    = @tree.maint_date
+    %b Replace Date
+    = @tree.replace_date
 
 = link_to 'Edit', edit_tree_path(@tree)
 \|

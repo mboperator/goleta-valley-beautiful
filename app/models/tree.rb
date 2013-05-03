@@ -1,55 +1,65 @@
-class Tree
-  include Mongoid::Document
-  include Mongoid::Timestamps::Short
+class Tree < ActiveRecord::Base
+  attr_accessible :common_name,
+                  :genus,
+                  :species,
+                  :diameter_at_height,
+                  :height,
+                  :spread,
+                  :grove,
+                  :status,
+                  :maint_date,
+                  :plant_date,
+                  :replace_date,
+                  :group_ids,
+                  :agency_id,
+                  #LEGACY FIELDS
+                  :street_no,
+                  :street,
+                  :lonlat
 
-  #Name Fields
-  field :common_name, type: String
-  field :genus, type: String
-  field :species, type: String
-
-  #Location Fields
-  field :street_no, type: Integer
-  field :street, type: String
-  field :city, type: String
-  field :state, type: String
-
-  field :loc, :type => Array
-  index( { location: "2d" }, { min: -200, max: 200 } )
-
-  #Date Fields, u(pdated)_at and c(reated)_at included.
-  field :maint_date, type: Date
-  field :replace_date, type: Date
-  field :plant_date, type: Date
-
-  #Excel Migration fields, temporary
-  field :plant_date_mig, type: String
-  field :replace_date_mig, type: String
-  field :maint_date_mig, type: String
-
-  #Attribute Fields
-  field :ag_id, type: String
-  field :diameter_at_height, type: Float
-  field :height, type: Float
-  field :spread, type: Float
-  field :grove, type: Boolean
-  field :status, type: Integer
-
-  #Grouping Relation
-  belongs_to :group
+  #Relationships
   belongs_to :agency
+  has_and_belongs_to_many :groups
 
+  #Geospatial
+  self.rgeo_factory_generator = RGeo::Geos.factory_generator(:srid => 4326)
+  set_rgeo_factory_for_column(:lonlat, RGeo::Geographic.spherical_factory(:srid => 4326))
 
-  ###Functions
-  def migrate_dates
-    if plant_date_mig
+    #address -> coords
+  geocoded_by :address
+  after_initialize :init
+  after_validation :geocode
+    #coords -> address
+  reverse_geocoded_by :latitude, :longitude
 
+  def self.last_updated
+    Tree.order( "updated_at DESC").limit(1)
+  end
 
-    elsif replace_date_mig
+  def address
+    "#{street_no.to_s} #{[street, "CA", "USA"].compact.join(', ')}"
+  end
 
-    elsif maint_date_mig
+  def init
+    self.lonlat ||= Tree.rgeo_factory_for_column(:lonlat).point(0, 0)
+  end
 
-    end
+  def latitude
+    self.lonlat.lat
+  end
 
+  def latitude=(value)
+    lon = self.lonlat.lon
+    self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(lon, value)
+  end
+
+  def longitude
+    self.lonlat.lon
+  end
+
+  def longitude=(value)
+    lat = self.lonlat.lat
+    self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(value, lat)
   end
 
 

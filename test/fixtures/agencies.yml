@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  identity: MyString
+  shortname: MyString
   name: MyString
   description: MyString
 
 two:
-  identity: MyString
+  shortname: MyString
   name: MyString
   description: MyString

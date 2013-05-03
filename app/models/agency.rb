@@ -1,12 +1,9 @@
-class Agency
-  include Mongoid::Document
+class Agency < ActiveRecord::Base
+  attr_accessible :description, :name, :shortname
 
-  field :_id, type:String, default: -> { shortname }
-  field :shortname, type: String
-  field :name, type: String
-  field :description, type: String
-
-  validates :shortname, uniqueness: true
+  #Relationships
   has_many :trees
+
+  #Pretty URLs
 
 end
