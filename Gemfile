@@ -10,11 +10,15 @@ gem 'pg'
 gem 'activerecord-postgis-adapter'
 gem 'geocoder'
 
+#API
+gem 'acts_as_api'
+
 #layout stuff
 gem 'haml'
 gem 'haml-rails', :group => :development
 gem 'simple_form'
 gem 'bootstrap-sass'
+gem 'will_paginate'
 
 
 # Gems used only for assets and not required

@@ -7,7 +7,7 @@ class AgenciesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @agencies }
+      format.json { render_for_api :public, :json => @agencies, :root => :agencies }
     end
   end
 

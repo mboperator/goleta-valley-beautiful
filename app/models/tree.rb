@@ -15,7 +15,9 @@ class Tree < ActiveRecord::Base
                   #LEGACY FIELDS
                   :street_no,
                   :street,
-                  :lonlat
+                  :lonlat,
+                  :longitude,
+                  :latitude
 
   #Relationships
   belongs_to :agency
@@ -28,12 +30,47 @@ class Tree < ActiveRecord::Base
     #address -> coords
   geocoded_by :address
   after_initialize :init
-  after_validation :geocode
     #coords -> address
   reverse_geocoded_by :latitude, :longitude
 
+   #custom JSON
+  acts_as_api
+  api_accessible :public do |template|
+    template.add :common_name
+    template.add :genus
+    template.add :species
+    template.add :agency_id
+    template.add :status
+    template.add :diameter_at_height
+    template.add :height
+    template.add :spread
+    template.add :longitude
+    template.add :latitude
+  end
+
+
+
+
+
   def self.last_updated
     Tree.order( "updated_at DESC").limit(1)
+  end
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |tree|
+        csv << tree.attributes.values_at(*column_names)
+      end
+    end
+  end
+
+  def self.search(search)
+    if search
+      where('common_name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
   end
 
   def address
@@ -44,22 +81,28 @@ class Tree < ActiveRecord::Base
     self.lonlat ||= Tree.rgeo_factory_for_column(:lonlat).point(0, 0)
   end
 
-  def latitude
-    self.lonlat.lat
-  end
+  #def latitude
+  #  self.lonlat.lat
+  #end
+  #
+  #def latitude=(value)
+  #  lon = self.lonlat.lon
+  #  self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(lon, value)
+  #  self.latitude = value
+  #end
+  #
+  #def longitude
+  #  self.lonlat.lon
+  #end
+  #
+  #def longitude=(value)
+  #  lat = self.lonlat.lat
+  #  self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(value, lat)
+  #  self.longitude = value
+  #end
 
-  def latitude=(value)
-    lon = self.lonlat.lon
-    self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(lon, value)
-  end
-
-  def longitude
-    self.lonlat.lon
-  end
-
-  def longitude=(value)
-    lat = self.lonlat.lat
-    self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(value, lat)
+  def synclatlon(val1, val2)
+    self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(val2, val1)
   end
 
 

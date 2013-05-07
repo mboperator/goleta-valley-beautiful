@@ -1,31 +1,5 @@
 %h1 Listing trees
-
-%table
-  %tr
-    %th Common name
-    %th Genus
-    %th Species
-    %th Diameter at height
-    %th Height
-    %th Spread
-    %th Grove
-    %th
-    %th
-    %th
-
-  - @trees.each do |tree|
-    %tr
-      %td= tree.common_name
-      %td= tree.genus
-      %td= tree.species
-      %td= tree.diameter_at_height
-      %td= tree.height
-      %td= tree.spread
-      %td= tree.grove
-      %td= link_to 'Show', tree
-      %td= link_to 'Edit', edit_tree_path(tree)
-      %td= link_to 'Destroy', tree, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
+#trees
+  = render 'trees'
 
 = link_to 'New Tree', new_tree_path

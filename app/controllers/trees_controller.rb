@@ -2,12 +2,15 @@
 class TreesController < ApplicationController
   # GET /trees
   # GET /trees.json
+  helper_method :sort_column, :sort_direction
+  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   def index
-    @trees = Tree.all
+    @trees = Tree.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @trees }
+      format.json { render_for_api :public, :json => @trees, :root => :trees }
+      format.csv { send_data @trees.to_csv }
     end
   end
 
@@ -47,13 +50,13 @@ class TreesController < ApplicationController
   # POST /trees.json
   def create
     @tree = Tree.new(params[:tree])
-
+    @tree.synclatlon(@tree.latitude, @tree.longitude)
     respond_to do |format|
       if @tree.save
         format.html { redirect_to @tree, notice: 'Tree was successfully created.' }
         format.json { render json: @tree, status: :created, location: @tree }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @tree.errors, status: :unprocessable_entity }
       end
     end
@@ -86,4 +89,13 @@ class TreesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sort_column
+    Tree.column_names.include?(params[:sort]) ? params[:sort] : "common_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end

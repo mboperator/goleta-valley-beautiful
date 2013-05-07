@@ -6,4 +6,10 @@ class Agency < ActiveRecord::Base
 
   #Pretty URLs
 
+  #custom JSON
+  acts_as_api
+  api_accessible :public do |template|
+    template.add :name
+    template.add :shortname
+  end
 end
