@@ -15,12 +15,12 @@
 development:
   adapter: postgis
   encoding: unicode
-  database: Goleta Valley Beautiful (Postgres)_development
+  database: gvb_development
   pool: 5
-  username: marcusbernales
-  password: qazqaz101
-  su_username: admin
-  su_password: qazqaz101
+  username: gvb
+  password: gvbtrees
+  su_username: postgres
+  su_password: dv0r@k!@
   postgis_extension: postgis
   schema_search_path: '"$user", public, postgis'
 
@@ -45,23 +45,23 @@ development:
 test:
   adapter: postgis
   encoding: unicode
-  database: Goleta Valley Beautiful (Postgres)_test
+  database: gvb_test
   pool: 5
-  username: admin
-  password: qazqaz101
-  su_username: admin
-  su_password: qazqaz101
+  username: gvb
+  password: gvbtrees
+  su_username: postgres
+  su_password: dv0r@k!@
   postgis_extension: postgis
   schema_search_path: '"$user", public, postgis'
 
 production:
   adapter: postgis
   encoding: unicode
-  database: Goleta Valley Beautiful (Postgres)_production
+  database: gvb_production
   pool: 5
-  username: admin
-  password: qazqaz101
-  su_username: admin
-  su_password: qazqaz101
+  username: gvb
+  password: gvbtrees
+  su_username: postgres
+  su_password: dv0r@k!@
   postgis_extension: postgis
   schema_search_path: '"$user", public, postgis'
