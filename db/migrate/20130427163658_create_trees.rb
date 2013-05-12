@@ -1,17 +1,15 @@
 class CreateTrees < ActiveRecord::Migration
   def change
     create_table :trees do |t|
-      t.string :common_name
-      t.string :genus
-      t.string :species
+      t.integer :tree_type_id
       t.date :maint_date
       t.date :replace_date
-      t.datetime :plant_date
+      t.date :plant_date
       t.float :diameter_at_height
       t.float :height
       t.float :spread
       t.boolean :grove
-      t.integer :status
+      t.integer :status_id
 
       t.timestamps
     end

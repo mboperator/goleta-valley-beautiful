@@ -1,17 +1,10 @@
-= simple_form_for @tree do |f|
-  = f.input :common_name
-  = f.input :genus
-  = f.input :species
-  = f.input :diameter_at_height
-  = f.input :height
-  = f.input :spread
-  = f.input :grove
-  = f.input :status
-  = f.input :maint_date
-  = f.input :plant_date
-  = f.input :replace_date
+= form_for @tree do |f|
+  - if @tree.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@tree.errors.count, "error")} prohibited this tree from being saved:"
+      %ul
+        - @tree.errors.full_messages.each do |msg|
+          %li= msg
 
-  = f.association :agency, as: :radio_buttons
-  = f.association :groups, as: :check_boxes
-
-  = f.button :submit
+  .actions
+    = f.submit 'Save'

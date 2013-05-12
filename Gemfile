@@ -20,6 +20,13 @@ gem 'simple_form'
 gem 'bootstrap-sass'
 gem 'will_paginate'
 
+#admin
+gem 'activeadmin'
+gem 'meta_search'
+
+#user stuff
+gem 'devise'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,7 +40,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'rails-backbone'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

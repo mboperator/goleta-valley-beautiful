@@ -91,7 +91,7 @@ class TreesController < ApplicationController
   end
 
   def sort_column
-    Tree.column_names.include?(params[:sort]) ? params[:sort] : "common_name"
+    Tree.column_names.include?(params[:sort]) ? params[:sort] : "height"
   end
 
   def sort_direction

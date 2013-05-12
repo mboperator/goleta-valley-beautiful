@@ -1,0 +1,17 @@
+%h1 Listing tree_statuses
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @tree_statuses.each do |tree_status|
+    %tr
+      %td= link_to 'Show', tree_status
+      %td= link_to 'Edit', edit_tree_status_path(tree_status)
+      %td= link_to 'Destroy', tree_status, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Tree status', new_tree_status_path

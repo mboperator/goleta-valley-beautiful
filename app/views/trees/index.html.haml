@@ -1,5 +1,17 @@
 %h1 Listing trees
-#trees
-  = render 'trees'
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @trees.each do |tree|
+    %tr
+      %td= link_to 'Show', tree
+      %td= link_to 'Edit', edit_tree_path(tree)
+      %td= link_to 'Destroy', tree, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
 
 = link_to 'New Tree', new_tree_path

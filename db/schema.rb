@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505033424) do
+ActiveRecord::Schema.define(:version => 20130511020206) do
+
+  create_table "active_admin_comments", :force => true do |t|
+    t.string   "resource_id",   :null => false
+    t.string   "resource_type", :null => false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.text     "body"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "namespace"
+  end
 
   create_table "agencies", :force => true do |t|
     t.string   "shortname"
@@ -33,13 +44,32 @@ ActiveRecord::Schema.define(:version => 20130505033424) do
     t.integer "tree_id"
   end
 
-  create_table "trees", :force => true do |t|
-    t.string   "common_name"
+  create_table "tree_genus", :force => true do |t|
     t.string   "genus"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tree_statuses", :force => true do |t|
+    t.string   "status"
+    t.integer  "level"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tree_types", :force => true do |t|
+    t.string   "common_name"
     t.string   "species"
+    t.integer  "tree_genus_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "trees", :force => true do |t|
+    t.integer  "tree_type_id"
     t.date     "maint_date"
     t.date     "replace_date"
-    t.datetime "plant_date"
+    t.date     "plant_date"
     t.float    "diameter_at_height"
     t.float    "height"
     t.float    "spread"
@@ -53,6 +83,21 @@ ActiveRecord::Schema.define(:version => 20130505033424) do
     t.string   "street"
     t.float    "longitude"
     t.float    "latitude"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
 end

@@ -10,17 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require underscore
+//= require backbone
 //= require jquery
-//= require jquery_ujs
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/goleta_valley_beautiful_postgres
+//= require leaflet/leaflet
 //= require_tree .
 
-$(function() {
-    $("#trees th a, #trees .pagination a").on("click", function() {
-        $.getScript(this.href);
-        return false;
-    });
-    $("#trees_search input").keyup(function() {
-        $.get($("#trees_search").attr("action"), $("#trees_search").serialize(), null, "script");
-        return false;
-    });
-});
