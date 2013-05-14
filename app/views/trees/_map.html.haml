@@ -1,0 +1,6 @@
+- if @trees
+  %h3 Tree Map
+  %div{ id: "map"}
+  :javascript
+    map = new L.map('map');
+    initMap(map);

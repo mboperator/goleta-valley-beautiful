@@ -6,19 +6,36 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #Data/GeoSpatial stuff
+#Postgres gem
 gem 'pg'
+#Postgis adapter
 gem 'activerecord-postgis-adapter'
+#for Geocoding addresses
 gem 'geocoder'
 
 #API
 gem 'acts_as_api'
 
 #layout stuff
+#markup
 gem 'haml'
 gem 'haml-rails', :group => :development
+#forms
 gem 'simple_form'
+
+#frontend styling
 gem 'bootstrap-sass'
 gem 'will_paginate'
+gem 'pjax_rails'
+gem 'rack-pjax'
+
+#activeadmin
+gem 'activeadmin'
+gem 'activeadmin-axlsx'
+gem 'meta_search'
+
+#user login
+gem 'devise'
 
 
 # Gems used only for assets and not required
@@ -33,7 +50,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'rails-backbone'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

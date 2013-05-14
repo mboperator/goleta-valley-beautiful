@@ -1,0 +1,11 @@
+.agency_list
+  .btn-group
+    %a{ class: "btn dropdown-toggle btn-block", data: {"toggle" => "dropdown"}, href: '#'}
+      %span{ :class => "caret" }
+      %i
+        = @trees.first.agency if @trees.first
+        = Agency.first.shortname unless @trees.first
+    %ul{ :class => "dropdown-menu" }
+      - Agency.all.each do |a|
+        %li
+          = link_to a.shortname.to_s, agency_trees_path(a)

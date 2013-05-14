@@ -5,7 +5,11 @@ class TreesController < ApplicationController
   helper_method :sort_column, :sort_direction
   skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   def index
-    @trees = Tree.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 20, :page => params[:page])
+    if params[:agency_id]
+      @trees = Tree.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page]).where(agency_id: params[:agency_id])
+    else
+      @trees = Tree.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -50,13 +54,13 @@ class TreesController < ApplicationController
   # POST /trees.json
   def create
     @tree = Tree.new(params[:tree])
-    @tree.synclatlon(@tree.latitude, @tree.longitude)
+    @tree.synclatlon
     respond_to do |format|
       if @tree.save
         format.html { redirect_to @tree, notice: 'Tree was successfully created.' }
         format.json { render json: @tree, status: :created, location: @tree }
       else
-        format.html { render action: 'new' }
+        format.html { render 'new' }
         format.json { render json: @tree.errors, status: :unprocessable_entity }
       end
     end
@@ -72,7 +76,7 @@ class TreesController < ApplicationController
         format.html { redirect_to @tree, notice: 'Tree was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit" }
         format.json { render json: @tree.errors, status: :unprocessable_entity }
       end
     end
@@ -91,7 +95,7 @@ class TreesController < ApplicationController
   end
 
   def sort_column
-    Tree.column_names.include?(params[:sort]) ? params[:sort] : "common_name"
+    Tree.column_names.include?(params[:sort]) ? params[:sort] : "height"
   end
 
   def sort_direction

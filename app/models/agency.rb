@@ -12,4 +12,8 @@ class Agency < ActiveRecord::Base
     template.add :name
     template.add :shortname
   end
+
+  def to_s
+    "#{shortname} - #{name}"
+  end
 end

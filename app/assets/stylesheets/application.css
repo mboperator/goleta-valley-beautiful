@@ -9,5 +9,12 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require leaflet/leaflet
  *= require_tree .
  */
+
+#map {
+    height: 400px;
+    width: 100%;
+    float: right;
+}

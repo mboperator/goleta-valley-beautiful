@@ -1,38 +1,10 @@
 %p#notice= notice
-
-%p
-  %b Common name:
-  = @tree.common_name
-  %b Genus:
-  = @tree.genus
-  %b Species:
-  = @tree.species
-  %b Planted at:
-  = @tree.plant_date
-%p
-  %b Coords (lon,lat)
-  = @tree.longitude
-  ,
-  = @tree.latitude
-%p
-  %b Diameter at height:
-  = @tree.diameter_at_height
-%p
-  %b Height:
-  = @tree.height
-%p
-  %b Spread:
-  = @tree.spread
-%p
-  %b Grove:
-  = @tree.grove
-= if @tree.maint_date || @tree.replace_date
-  %p
-    %b Last Maintained
-    = @tree.maint_date
-    %b Replace Date
-    = @tree.replace_date
-
 = link_to 'Edit', edit_tree_path(@tree)
 \|
 = link_to 'Back', trees_path
+
+:javascript
+  latitude = "#{@tree.latitude}";
+  longitude = "#{@tree.longitude}";
+  tree_id = "#{@tree.id}";
+  mapPlot(map, latitude, longitude);

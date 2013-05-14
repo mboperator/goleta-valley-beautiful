@@ -19,8 +19,11 @@
       .container
         .content
           .row
-            .span12
+            %div{class: 'pull-left span6'}
               = render 'layouts/messages'
               = yield
+            %div{class: 'pull-left span6'}
+              = render 'trees/map'
+
           %footer
             = yield :scripts

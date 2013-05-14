@@ -48,7 +48,7 @@ class AgenciesController < ApplicationController
         format.html { redirect_to @agency, notice: 'Agency was successfully created.' }
         format.json { render json: @agency, status: :created, location: @agency }
       else
-        format.html { render action: "new" }
+        format.html { render "new" }
         format.json { render json: @agency.errors, status: :unprocessable_entity }
       end
     end
@@ -64,7 +64,7 @@ class AgenciesController < ApplicationController
         format.html { redirect_to @agency, notice: 'Agency was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit" }
         format.json { render json: @agency.errors, status: :unprocessable_entity }
       end
     end

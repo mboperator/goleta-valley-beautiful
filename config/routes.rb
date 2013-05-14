@@ -1,11 +1,13 @@
 GoletaValleyBeautifulPostgres::Application.routes.draw do
 
-  resources :agencies
 
-  resources :groups
+  devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
-  resources :trees
-
+  resources :trees, :only => [:index, :new]
+  resources :groups, :agencies , :shallow => true do |group|
+    resources :trees
+  end
 
 
   # The priority is based upon order of creation:

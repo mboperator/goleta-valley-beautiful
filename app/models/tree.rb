@@ -1,27 +1,37 @@
 class Tree < ActiveRecord::Base
-  attr_accessible :common_name,
-                  :genus,
-                  :species,
+  attr_accessible :tree_type_id,
+                  :id,
                   :diameter_at_height,
                   :height,
                   :spread,
                   :grove,
-                  :status,
+
+                  #Dates
                   :maint_date,
                   :plant_date,
                   :replace_date,
+
                   :group_ids,
                   :agency_id,
+                  :status,
+
                   #LEGACY FIELDS
                   :street_no,
                   :street,
+
+                  #SPATIAL FIELDS
                   :lonlat,
                   :longitude,
                   :latitude
 
   #Relationships
   belongs_to :agency
+  belongs_to :tree_type
+  has_one :tree_status
+  has_one :tree_genus, :through => :tree_type
   has_and_belongs_to_many :groups
+  accepts_nested_attributes_for :tree_type
+
 
   #Geospatial
   self.rgeo_factory_generator = RGeo::Geos.factory_generator(:srid => 4326)
@@ -36,9 +46,7 @@ class Tree < ActiveRecord::Base
    #custom JSON
   acts_as_api
   api_accessible :public do |template|
-    template.add :common_name
-    template.add :genus
-    template.add :species
+    template.add :tree_type_id
     template.add :agency_id
     template.add :status
     template.add :diameter_at_height
@@ -73,6 +81,18 @@ class Tree < ActiveRecord::Base
     end
   end
 
+  def to_s
+    "#{tree_type.common_name} (#{tree_type.genus} #{tree_type.species})"
+  end
+
+  def genus
+    "#{tree_type.genus}"
+  end
+
+  def species
+    "#{tree_type.species}"
+  end
+
   def address
     "#{street_no.to_s} #{[street, "CA", "USA"].compact.join(', ')}"
   end
@@ -81,27 +101,29 @@ class Tree < ActiveRecord::Base
     self.lonlat ||= Tree.rgeo_factory_for_column(:lonlat).point(0, 0)
   end
 
-  #def latitude
-  #  self.lonlat.lat
-  #end
+#def latitude
+#  self.lonlat.lat
+#end
   #
   #def latitude=(value)
+  #  self.latitude = value
   #  lon = self.lonlat.lon
   #  self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(lon, value)
-  #  self.latitude = value
   #end
-  #
-  #def longitude
-  #  self.lonlat.lon
-  #end
-  #
+  ##
+  ##def longitude
+  ##  self.lonlat.lon
+  ##end
+  ##
   #def longitude=(value)
-  #  lat = self.lonlat.lat
-  #  self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(value, lat)
   #  self.longitude = value
+  #  lat = self.lonlat.lat
+  #  self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(longitude, lat)
   #end
 
-  def synclatlon(val1, val2)
+  def synclatlon()
+    val1 = self.latitude
+    val2 = self.longitude
     self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(val2, val1)
   end
 
