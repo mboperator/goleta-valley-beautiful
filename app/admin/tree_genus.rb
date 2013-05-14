@@ -1,5 +1,4 @@
 ActiveAdmin.register TreeGenus do
-
   index do |f|
     selectable_column
     column :id
@@ -18,8 +17,6 @@ ActiveAdmin.register TreeGenus do
       row :species_count
     end
     active_admin_comments
-
   end
-  
 end
 

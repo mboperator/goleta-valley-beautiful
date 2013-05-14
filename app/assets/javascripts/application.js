@@ -13,9 +13,18 @@
 //= require underscore
 //= require backbone
 //= require jquery
+//= require jquery-ui
+//= require jquery_ujs
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/goleta_valley_beautiful_postgres
+//= require bootstrap-dropdown
+//= require bootstrap
 //= require leaflet/leaflet
+//= require pjax
+//= require jquery.pjax
 //= require_tree .
 
+$(document).ready(function(){
+    $('[data-pjax-container]').pjax('a');
+});

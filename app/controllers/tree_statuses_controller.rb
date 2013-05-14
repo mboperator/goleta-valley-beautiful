@@ -47,7 +47,7 @@ class TreeStatusesController < ApplicationController
         format.html { redirect_to @tree_status, notice: 'Tree status was successfully created.' }
         format.json { render json: @tree_status, status: :created, location: @tree_status }
       else
-        format.html { render action: "new" }
+        format.html { render "new" }
         format.json { render json: @tree_status.errors, status: :unprocessable_entity }
       end
     end
@@ -63,7 +63,7 @@ class TreeStatusesController < ApplicationController
         format.html { redirect_to @tree_status, notice: 'Tree status was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render "edit" }
         format.json { render json: @tree_status.errors, status: :unprocessable_entity }
       end
     end

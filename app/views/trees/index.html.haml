@@ -1,17 +1,28 @@
-%h1 Listing trees
+%h3 Listing trees
+%div{:data => {"pjax-container" => true}}
+  %div{:class => "well pull-left"}
 
-%table
-  %tr
-    %th
-    %th
-    %th
+    = render 'agencies/list'
+    %div{:class => "trees pull-left"}
+      %table{:class => "table"}
+        %tr
+          %th Common Name
+          %th Genus
+          %th Species
+          %th DBH
+          %th Height
+          %th Agency
+          - @trees.each do |tree|
+            %tr
+              %td
+                = link_to tree.tree_type.common_name, tree_path(tree)
+              %td= tree.genus
+              %td= tree.species
+              %td= tree.diameter_at_height
+              %td= tree.height
+              %td
+                - if tree.agency
+                  = tree.agency.shortname
+                - else
 
-  - @trees.each do |tree|
-    %tr
-      %td= link_to 'Show', tree
-      %td= link_to 'Edit', edit_tree_path(tree)
-      %td= link_to 'Destroy', tree, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Tree', new_tree_path
+    = will_paginate @trees

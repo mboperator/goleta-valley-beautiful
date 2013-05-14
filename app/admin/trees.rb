@@ -1,4 +1,29 @@
 ActiveAdmin.register Tree do
+  scope :joined, :default => true do |tree|
+    tree.includes [:tree_type]
+    tree.includes [:tree_genus]
+  end
+
+  controller do
+    def max_csv_records; @per_page; end
+
+  end
+
+  index do
+    selectable_column
+    column :id
+    column :tree_type, :sortable => 'tree_types.common_name'
+    column :genus, :sortable => 'tree_genus.genus'
+    column :species, :sortable => 'tree_types.species'
+    column "DBH", :diameter_at_height, :sortable
+    column :height
+    column :spread
+    column :agency
+    column :plant_date
+    default_actions
+  end
+
+
 
   form do |f|
     f.inputs "Basics" do
@@ -21,7 +46,7 @@ ActiveAdmin.register Tree do
   show do
     attributes_table do
       row :id
-      row :full_name
+      row :to_s
       row :agency
       row :diameter_at_height
       row :height
@@ -32,5 +57,17 @@ ActiveAdmin.register Tree do
     end
     active_admin_comments
   end
-  
+
+  csv do
+    column :id
+    column :tree_type
+    column ("genus") { |tree| tree.genus }
+    column ("species") { |tree| tree.species }
+    column :diameter_at_height
+    column :height
+    column :spread
+    column :agency
+    column :plant_date
+  end
+
 end

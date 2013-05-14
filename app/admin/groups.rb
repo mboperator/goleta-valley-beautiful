@@ -1,4 +1,13 @@
 ActiveAdmin.register Group do
+  controller do
+    def trees
+
+    end
+
+    def max_csv_records; @per_page; end
+
+  end
+
 
   index do
     selectable_column
@@ -10,5 +19,4 @@ ActiveAdmin.register Group do
     column :updated_at
     default_actions
   end
-  
 end

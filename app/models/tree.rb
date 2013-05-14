@@ -1,5 +1,6 @@
 class Tree < ActiveRecord::Base
   attr_accessible :tree_type_id,
+                  :id,
                   :diameter_at_height,
                   :height,
                   :spread,
@@ -12,7 +13,7 @@ class Tree < ActiveRecord::Base
 
                   :group_ids,
                   :agency_id,
-                  :tree_status_id,
+                  :status,
 
                   #LEGACY FIELDS
                   :street_no,
@@ -27,7 +28,10 @@ class Tree < ActiveRecord::Base
   belongs_to :agency
   belongs_to :tree_type
   has_one :tree_status
+  has_one :tree_genus, :through => :tree_type
   has_and_belongs_to_many :groups
+  accepts_nested_attributes_for :tree_type
+
 
   #Geospatial
   self.rgeo_factory_generator = RGeo::Geos.factory_generator(:srid => 4326)
@@ -77,8 +81,16 @@ class Tree < ActiveRecord::Base
     end
   end
 
-  def full_name
+  def to_s
     "#{tree_type.common_name} (#{tree_type.genus} #{tree_type.species})"
+  end
+
+  def genus
+    "#{tree_type.genus}"
+  end
+
+  def species
+    "#{tree_type.species}"
   end
 
   def address
@@ -109,9 +121,9 @@ class Tree < ActiveRecord::Base
   #  self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(longitude, lat)
   #end
 
-  def synclatlon(val1, val2)
-    #val2 is latitude
-    #val1 is longitude
+  def synclatlon()
+    val1 = self.latitude
+    val2 = self.longitude
     self.lonlat = Tree.rgeo_factory_for_column(:lonlat).point(val2, val1)
   end
 

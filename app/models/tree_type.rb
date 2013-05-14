@@ -6,7 +6,7 @@ class TreeType < ActiveRecord::Base
   accepts_nested_attributes_for :tree_genus
 
   def to_s
-    "#{common_name} (#{tree_genus} #{species})"
+    "#{common_name}"
   end
 
   def genus

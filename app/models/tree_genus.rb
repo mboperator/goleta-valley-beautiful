@@ -9,5 +9,4 @@ class TreeGenus < ActiveRecord::Base
   def species_count
     self.tree_types.count
   end
-
 end

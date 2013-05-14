@@ -16,9 +16,4 @@ class Agency < ActiveRecord::Base
   def to_s
     "#{shortname} - #{name}"
   end
-
-  def to_label
-    "#{shortname} - #{name}"
-  end
-
 end
