@@ -13,7 +13,7 @@ class Tree < ActiveRecord::Base
 
                   :group_ids,
                   :agency_id,
-                  :status,
+                  :tree_status_id,
 
                   #LEGACY FIELDS
                   :street_no,
