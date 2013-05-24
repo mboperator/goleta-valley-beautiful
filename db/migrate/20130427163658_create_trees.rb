@@ -9,7 +9,7 @@ class CreateTrees < ActiveRecord::Migration
       t.float :height
       t.float :spread
       t.boolean :grove
-      t.integer :status_id
+      t.integer :tree_status_id
 
       t.timestamps
     end
