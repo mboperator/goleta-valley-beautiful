@@ -1,10 +1,12 @@
 GoletaValleyBeautifulPostgres::Application.routes.draw do
 
 
+  resources :tree_types, :only => [:index, :show]
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :trees, :only => [:index, :new]
+  resources :trees, :only => [:index, :create]
   resources :groups, :agencies , :shallow => true do |group|
     resources :trees
   end
