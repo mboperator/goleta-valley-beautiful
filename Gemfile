@@ -28,6 +28,7 @@ gem 'bootstrap-sass'
 gem 'will_paginate'
 gem 'pjax_rails'
 gem 'rack-pjax'
+gem 'gmaps4rails'
 
 #activeadmin
 gem 'activeadmin'

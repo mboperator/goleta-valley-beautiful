@@ -17,4 +17,9 @@ class Agency < ActiveRecord::Base
   def to_s
     "#{shortname} - #{name}"
   end
+
+  def list_s
+    "#{shortname} - #{name} : #{trees.count}"
+  end
+
 end

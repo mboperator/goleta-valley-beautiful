@@ -20,7 +20,6 @@
 //= require backbone/goleta_valley_beautiful_postgres
 //= require bootstrap-dropdown
 //= require bootstrap
-//= require leaflet/leaflet
 //= require pjax
 //= require jquery.pjax
 //= require_tree .

@@ -1,0 +1,27 @@
+%h3
+  = tree.common_name
+= tree.scientific_name
+.stats
+  %b Agency:
+  - if tree.agency
+    = tree.agency
+  - else
+    nil
+  %br
+  %b DBH:
+  - if tree.diameter_at_height
+    = tree.diameter_at_height
+  - else
+    %i nil
+  %br
+  %b Height:
+  - if tree.height
+    = tree.height
+  - else
+    %i nil
+  %br
+  %b Spread:
+  - if tree.spread
+    = tree.spread
+  - else
+    %i nil
