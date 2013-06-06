@@ -1,8 +1,10 @@
 %h3 Listing trees
-%div{:data => {"pjax-container" => true}}
-  %div{:class => "well pull-left"}
 
-    = render 'agencies/list'
+%div{:class => "well pull-left", :id => "treeList"}
+
+  = render 'agencies/list'
+  %div{:data => {"pjax-container" => true}}
+
     %div{:class => "trees pull-left"}
       %table{:class => "table"}
         %tr
@@ -26,3 +28,5 @@
                 - else
 
     = will_paginate @trees
+
+

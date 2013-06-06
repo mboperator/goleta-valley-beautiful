@@ -1,10 +1,4 @@
 %p#notice= notice
 = link_to 'Edit', edit_tree_path(@tree)
 \|
-= link_to 'Back', trees_path
-
-:javascript
-  latitude = "#{@tree.latitude}";
-  longitude = "#{@tree.longitude}";
-  tree_id = "#{@tree.id}";
-  mapPlot(map, latitude, longitude);
+= link_to 'Back', agency_trees_path(@tree.agency)

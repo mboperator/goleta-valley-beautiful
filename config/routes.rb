@@ -1,5 +1,6 @@
 GoletaValleyBeautifulPostgres::Application.routes.draw do
 
+  get '/', :to => 'trees#index'
 
   resources :tree_types, :only => [:index, :show]
 

@@ -2,6 +2,7 @@ ActiveAdmin.register Tree do
   scope :joined, :default => true do |tree|
     tree.includes [:tree_type]
     tree.includes [:tree_genus]
+    tree.includes [:agency]
   end
 
   controller do
@@ -18,7 +19,7 @@ ActiveAdmin.register Tree do
     column "DBH", :diameter_at_height, :sortable
     column :height
     column :spread
-    column :agency
+    column :agency, :sortable => 'agencies.name'
     column :plant_date
     default_actions
   end

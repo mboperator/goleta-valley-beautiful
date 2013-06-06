@@ -34,6 +34,7 @@ class Tree < ActiveRecord::Base
 
 
   #Geospatial
+  acts_as_gmappable :lat => "latitude", :lng => "longitude", :process_geocoding => :geocode?
   self.rgeo_factory_generator = RGeo::Geos.factory_generator(:srid => 4326)
   set_rgeo_factory_for_column(:lonlat, RGeo::Geographic.spherical_factory(:srid => 4326))
 
@@ -83,6 +84,14 @@ class Tree < ActiveRecord::Base
 
   def to_s
     "#{tree_type.common_name} (#{tree_type.genus} #{tree_type.species})"
+  end
+
+  def common_name
+    "#{tree_type.common_name}"
+  end
+
+  def scientific_name
+    "#{tree_type.genus} #{tree_type.species}"
   end
 
   def genus

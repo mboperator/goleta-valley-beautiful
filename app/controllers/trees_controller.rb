@@ -6,9 +6,19 @@ class TreesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   def index
     if params[:agency_id]
-      @trees = Tree.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page]).where(agency_id: params[:agency_id])
+      @q = Tree.where(agency_id: params[:agency_id])
+      @agency = Agency.find(params[:agency_id])
+      @trees = @q.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+      @json = @q.to_gmaps4rails do |tree, marker|
+        marker.infowindow render_to_string(:partial => "trees/show", :locals => { :tree => tree })
+        marker.title "#{tree}"
+      end
     else
       @trees = Tree.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+      @json = Tree.all(limit: 2000).to_gmaps4rails do |tree, marker|
+        marker.infowindow render_to_string(:partial => "trees/show", :locals => { :tree => tree })
+        marker.title "#{tree}"
+      end
     end
 
     respond_to do |format|
@@ -21,16 +31,13 @@ class TreesController < ApplicationController
   # GET /trees/1
   # GET /trees/1.json
   def show
-    if params[:id] == 000
+    @tree = Tree.find(params[:id])
 
-    else
-      @tree = Tree.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @tree }
 
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @tree }
-      end
-    end
+  end
 
   end
 

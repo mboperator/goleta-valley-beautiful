@@ -9,9 +9,21 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require leaflet/leaflet
+ *= require gmaps4rails
  *= require_tree .
  */
+
+body {
+    background-image: url('../images/background.jpg');
+    background-position-x: 50%;
+    background-position-y: 30%;
+    background-size: 110%;
+}
+
+.content {
+    background-color: rgba(255,255,255,.8);
+    height: 30%;
+}
 
 #map {
     height: 400px;
