@@ -6,7 +6,7 @@ class AgenciesController < ApplicationController
     @agencies = Agency.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render_for_api :public, :json => @agencies, :root => :agencies }
     end
   end
